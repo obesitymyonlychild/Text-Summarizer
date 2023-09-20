@@ -1,5 +1,6 @@
 from src.TextSummarizer.logging import logger
-from TextSummarizer.pipline.data_ingestion_1 import DataIngestionTrainingPipeline
+from TextSummarizer.pipeline.data_ingestion import DataIngestionTrainingPipeline
+from TextSummarizer.pipeline.data_validation import DataValidationTrainingPipeline
 
 logger.info("Welcome to your logging")
 
@@ -8,7 +9,17 @@ try:
     logger.info(f">>>>>>> Starting {STAGE_NAME} <<<<<<<<<")
     data_ingestion = DataIngestionTrainingPipeline()
     data_ingestion.main()
-    logger.info(f">>>>>>> Finished {STAGE_NAME} <<<<<<<<<")
+    logger.info(f">>>>>>> Finished {STAGE_NAME} <<<<<<<<<\n\nx==========x")
+except Exception as e:
+    logger.exception(e)
+    raise e
+
+STAGE_NAME = "data_validation"
+try:
+    logger.info(f">>>>>>> Starting {STAGE_NAME} <<<<<<<<<")
+    data_validation = DataValidationTrainingPipeline()
+    data_validation.main()
+    logger.info(f">>>>>>> Finished {STAGE_NAME} <<<<<<<<<\n\nx==========x")
 except Exception as e:
     logger.exception(e)
     raise e
